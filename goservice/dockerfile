@@ -1,0 +1,10 @@
+FROM golang:1.18
+
+WORKDIR /go/src
+
+COPY ./api .
+
+RUN go mod tidy && go build
+RUN cp api .. && rm -rf * && mv ../api .
+
+ENTRYPOINT ./api

@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>time service</title>
+    </head>
+    <body>
+        <div id="tick"></div>
+
+        <script>
+            function updateTime() {
+                fetch('http://localhost/time')
+                    .then(responce => responce.text())
+                    .then(data => document.getElementById("tick").innerHTML = data)
+                setTimeout(updateTime, 60000);
+            }
+
+            updateTime()
+        </script>
+
+    </body>
+</html>

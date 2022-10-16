@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  redis:
+    image: redis:7.0.5
+
+  goservice:
+    build: ./goservice
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - NTP=ntp1.ntp-servers.net
+
+  nginx:
+    build: ./nginx
+    depends_on:
+      - goservice
+    ports:
+      - "80:80"    
